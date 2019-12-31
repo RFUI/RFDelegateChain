@@ -49,9 +49,9 @@ STAGE_MAIN() {
             pod lib lint
         fi
 
-    elif [ "$RFCI_TASK" = "Xcode9" ]; then
+    elif [ "$RFCI_TASK" = "Xcode10" ]; then
         pod install
-        XC_Test "Test-iOS" "platform=iOS Simulator,name=iPhone X,OS=11.3"
+        XC_Test "Test-iOS" "platform=iOS Simulator,name=iPhone XS Max,OS=12.0"
         XC_Test "Test-iOS" "platform=iOS Simulator,name=iPhone 5,OS=9.0"
     else
         logError "Unexpected CI task: $RFCI_TASK"
