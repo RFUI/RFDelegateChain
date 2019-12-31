@@ -1,14 +1,12 @@
-/*!
-    UICollectionViewDelegateChain
-    RFDelegateChain
+/*
+ UICollectionViewDelegateChain
+ RFDelegateChain
 
-    Copyright (c) 2015-2016 BB9z
-    https://github.com/RFUI/Alpha
+ Copyright © 2015-2016, 2019 RFUI
+ https://github.com/RFUI/RFDelegateChain
 
-    The MIT License (MIT)
-    http://www.opensource.org/licenses/mit-license.php
-
-    Alpha
+ The MIT License (MIT)
+ http://www.opensource.org/licenses/mit-license.php
  */
 
 #import "UIScrollViewDelegateChain.h"

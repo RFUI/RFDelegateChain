@@ -1,13 +1,11 @@
-/*!
-    RFDelegateChain
+/*
+ RFDelegateChain
 
-    Copyright (c) 2014-2016 BB9z
-    https://github.com/RFUI/Alpha
+ Copyright © 2014-2016, 2019 RFUI
+ https://github.com/RFUI/RFDelegateChain
 
-    The MIT License (MIT)
-    http://www.opensource.org/licenses/mit-license.php
-
-    BETA
+ The MIT License (MIT)
+ http://www.opensource.org/licenses/mit-license.php
  */
 #import <RFInitializing/RFInitializing.h>
 #import <RFKit/RFRuntime.h>

@@ -1,14 +1,12 @@
-/*!
-    UITextFiledDelegateChain
-    RFDelegateChain
+/*
+ UITextFiledDelegateChain
+ RFDelegateChain
 
-    Copyright (c) 2014 BB9z
-    https://github.com/RFUI/Alpha
+ Copyright © 2014, 2019 RFUI
+ https://github.com/RFUI/RFDelegateChain
 
-    The MIT License (MIT)
-    http://www.opensource.org/licenses/mit-license.php
-
-    Alpha
+ The MIT License (MIT)
+ http://www.opensource.org/licenses/mit-license.php
  */
 #import "RFDelegateChain.h"
 
