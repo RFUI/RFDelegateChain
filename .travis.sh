@@ -59,7 +59,7 @@ STAGE_MAIN() {
 }
 
 STAGE_SUCCESS() {
-    if [ "$RFCI_TASK" = "Xcode9" ]; then
+    if [ "${RFCI_COVERAGE-}" = "1" ]; then
         curl -s https://codecov.io/bash | bash -s
     fi
 }

@@ -12,7 +12,9 @@ matrix:
     - osx_image: xcode11.3
       env: RFCI_TASK="POD_LINT"
     - osx_image: xcode10
-      env: RFCI_TASK="Xcode10"
+      env:
+      - RFCI_TASK="Xcode10"
+      - RFCI_COVERAGE=1
 before_install: ./.travis.sh SETUP
 script:         ./.travis.sh MAIN
 after_success:  ./.travis.sh SUCCESS
