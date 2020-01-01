@@ -86,6 +86,8 @@
 // All methods must be included in the build result, whatever the deployment target version is.
 // As a target which includes this library may be build with a higher deployment version.
 
+#if (defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0) || (defined(__TVOS_13_0) && __TV_OS_VERSION_MAX_ALLOWED >= __TVOS_13_0)
+
 - (void)textFieldDidChangeSelection:(UITextField *)textField {
     if (self.didChangeSelection) {
         self.didChangeSelection(textField, self.delegate);
@@ -95,6 +97,8 @@
         [self.delegate textFieldDidChangeSelection:textField];
     }
 }
+
+#endif
 
 #pragma clang diagnostic pop
 

@@ -33,7 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
-@property (nullable) void (^didChangeSelection)(UITextField *textField, id<UITextFieldDelegate> __nullable delegate);
+#if (defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0) || (defined(__TVOS_13_0) && __TV_OS_VERSION_MAX_ALLOWED >= __TVOS_13_0)
+@property (nullable) void (^didChangeSelection)(UITextField *textField, id<UITextFieldDelegate> __nullable delegate) API_AVAILABLE(ios(13.0), tvos(13.0));
+#endif
 
 @end
 

@@ -70,8 +70,8 @@
 		D5091B0D23BCD1AF00E52FF3 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				D5091B0E23BCD1AF00E52FF3 /* Test_tvOS.swift */,
 				D5091B1023BCD1AF00E52FF3 /* Info.plist */,
+				D5091B0E23BCD1AF00E52FF3 /* Test_tvOS.swift */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -90,9 +90,9 @@
 		D55FF82423BB19660064B61F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				D5091B0D23BCD1AF00E52FF3 /* tvOS */,
 				D55FF82523BB19660064B61F /* iOS */,
 				D55FF82A23BB1A6C0064B61F /* Shared */,
+				D5091B0D23BCD1AF00E52FF3 /* tvOS */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -275,8 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5091B1523BCD2E500E52FF3 /* RTHelper.m in Sources */,
-				D5091B1423BCD1DA00E52FF3 /* TestCore.swift in Sources */,
 				D5091B0F23BCD1AF00E52FF3 /* Test_tvOS.swift in Sources */,
+				D5091B1423BCD1DA00E52FF3 /* TestCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,8 +285,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D58A6FE523BB2283001C199E /* RTHelper.m in Sources */,
-				D55FF82C23BB1A7D0064B61F /* TestCore.swift in Sources */,
 				D58A6FEB23BB7FC9001C199E /* TestCollectionViewDataSourceChain.swift in Sources */,
+				D55FF82C23BB1A7D0064B61F /* TestCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
