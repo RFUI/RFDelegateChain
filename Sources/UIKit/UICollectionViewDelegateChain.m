@@ -87,7 +87,7 @@
     [self.delegate collectionView:collectionView didDeselectItemAtIndexPath:indexPath];
 }
 
-#if TARGET_OS_IOS
+#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldBeginMultipleSelectionInteractionAtIndexPath:(NSIndexPath *)indexPath {
     if (self.shouldBeginMultipleSelectionInteraction) {
         return self.shouldBeginMultipleSelectionInteraction(collectionView, indexPath, self.delegate);
