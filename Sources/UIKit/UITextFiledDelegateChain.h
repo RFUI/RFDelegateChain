@@ -10,19 +10,31 @@
  */
 #import "RFDelegateChain.h"
 
-@interface UITextFiledDelegateChain : RFDelegateChain <UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet id<UITextFieldDelegate> delegate;
+NS_ASSUME_NONNULL_BEGIN
 
-/// If thest property set, delegate methods wont called.
+@interface UITextFiledDelegateChain : RFDelegateChain <
+    UITextFieldDelegate
+>
+
+@property (weak, nullable, nonatomic) IBOutlet id<UITextFieldDelegate> delegate;
+
 #pragma mark Managing Editing
-@property (copy, nonatomic) BOOL (^shouldBeginEditing)(UITextField *textField, id<UITextFieldDelegate> delegate);
-@property (copy, nonatomic) void (^didBeginEditing)(UITextField *textField, id<UITextFieldDelegate> delegate);
-@property (copy, nonatomic) BOOL (^shouldEndEditing)(UITextField *textField, id<UITextFieldDelegate> delegate);
-@property (copy, nonatomic) void (^didEndEditing)(UITextField *textField, id<UITextFieldDelegate> delegate);
+
+@property (nullable) BOOL (^shouldBeginEditing)(UITextField *textField, id<UITextFieldDelegate> __nullable delegate);
+@property (nullable) void (^didBeginEditing)(UITextField *textField, id<UITextFieldDelegate> __nullable delegate);
+@property (nullable) BOOL (^shouldEndEditing)(UITextField *textField, id<UITextFieldDelegate> __nullable delegate);
+@property (nullable) void (^didEndEditing)(UITextField *textField, id<UITextFieldDelegate> __nullable delegate);
 
 #pragma mark Editing the Text Field’s Text
-@property (copy, nonatomic) BOOL (^shouldChangeCharacters)(UITextField *textField, NSRange inRange, NSString *replacementString, id<UITextFieldDelegate> delegate);
-@property (copy, nonatomic) BOOL (^shouldClear)(UITextField *textField, id<UITextFieldDelegate> delegate);
-@property (copy, nonatomic) BOOL (^shouldReturn)(UITextField *textField, id<UITextFieldDelegate> delegate);
+
+@property (nullable) BOOL (^shouldChangeCharacters)(UITextField *textField, NSRange inRange, NSString *replacementString, id<UITextFieldDelegate> __nullable delegate);
+@property (nullable) BOOL (^shouldClear)(UITextField *textField, id<UITextFieldDelegate> __nullable delegate);
+@property (nullable) BOOL (^shouldReturn)(UITextField *textField, id<UITextFieldDelegate> __nullable delegate);
+
+#pragma mark -
+
+@property (nullable) void (^didChangeSelection)(UITextField *textField, id<UITextFieldDelegate> __nullable delegate);
 
 @end
+
+NS_ASSUME_NONNULL_END

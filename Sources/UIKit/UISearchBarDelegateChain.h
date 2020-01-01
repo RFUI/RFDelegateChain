@@ -10,28 +10,34 @@
  */
 #import "RFDelegateChain.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UISearchBarDelegateChain : RFDelegateChain <
     UISearchBarDelegate
 >
 
-@property (weak, nonatomic) IBOutlet id<UISearchBarDelegate> delegate;
+@property (weak, nullable, nonatomic) IBOutlet id<UISearchBarDelegate> delegate;
 
-/// If thest property set, delegate methods wont called.
-#pragma mark Editing Text
-@property (copy, nonatomic) void (^didChange)(UISearchBar *searchBar, NSString *searchText, id<UISearchBarDelegate> delegate);
-@property (copy, nonatomic) BOOL (^shouldChangeTextInRange)(UISearchBar *searchBar, NSRange range, NSString *replacementText, id<UISearchBarDelegate> delegate);
-@property (copy, nonatomic) BOOL (^shouldBeginEditing)(UISearchBar *searchBar, id<UISearchBarDelegate> delegate);
-@property (copy, nonatomic) void (^didBeginEditing)(UISearchBar *searchBar, id<UISearchBarDelegate> delegate);
-@property (copy, nonatomic) BOOL (^shouldEndEditing)(UISearchBar *searchBar, id<UISearchBarDelegate> delegate);
-@property (copy, nonatomic) void (^didEndEditing)(UISearchBar *searchBar, id<UISearchBarDelegate> delegate);
+#pragma mark Managing the Search Text
 
-#pragma mark Clicking Buttons
-@property (copy, nonatomic) void (^bookmarkButtonClicked)(UISearchBar *searchBar, id<UISearchBarDelegate> delegate);
-@property (copy, nonatomic) void (^cancelButtonClicked)(UISearchBar *searchBar, id<UISearchBarDelegate> delegate);
-@property (copy, nonatomic) void (^searchButtonClicked)(UISearchBar *searchBar, id<UISearchBarDelegate> delegate);
-@property (copy, nonatomic) void (^resultsListButtonClicked)(UISearchBar *searchBar, id<UISearchBarDelegate> delegate);
+@property (nullable) void (^textDidChange)(UISearchBar *searchBar, NSString *searchText, id<UISearchBarDelegate> __nullable delegate);
+@property (nullable) BOOL (^shouldChangeTextInRange)(UISearchBar *searchBar, NSRange range, NSString *replacementText, id<UISearchBarDelegate> __nullable delegate);
+@property (nullable) BOOL (^shouldBeginEditing)(UISearchBar *searchBar, id<UISearchBarDelegate> __nullable delegate);
+@property (nullable) void (^didBeginEditing)(UISearchBar *searchBar, id<UISearchBarDelegate> __nullable delegate);
+@property (nullable) BOOL (^shouldEndEditing)(UISearchBar *searchBar, id<UISearchBarDelegate> __nullable delegate);
+@property (nullable) void (^didEndEditing)(UISearchBar *searchBar, id<UISearchBarDelegate> __nullable delegate);
 
-#pragma mark Scope Button
-@property (copy, nonatomic) void (^selectedScopeButtonIndexDidChange)(UISearchBar *searchBar, NSInteger selectedScope, id<UISearchBarDelegate> delegate);
+#pragma mark Responding to Clicks in Search Controls
+
+@property (nullable) void (^bookmarkButtonClicked)(UISearchBar *searchBar, id<UISearchBarDelegate> __nullable delegate);
+@property (nullable) void (^cancelButtonClicked)(UISearchBar *searchBar, id<UISearchBarDelegate> __nullable delegate);
+@property (nullable) void (^searchButtonClicked)(UISearchBar *searchBar, id<UISearchBarDelegate> __nullable delegate);
+@property (nullable) void (^resultsListButtonClicked)(UISearchBar *searchBar, id<UISearchBarDelegate> __nullable delegate);
+
+#pragma mark Responding to Scope Button Changes
+
+@property (nullable) void (^selectedScopeButtonIndexDidChange)(UISearchBar *searchBar, NSInteger selectedScope, id<UISearchBarDelegate> __nullable delegate);
 
 @end
+
+NS_ASSUME_NONNULL_END

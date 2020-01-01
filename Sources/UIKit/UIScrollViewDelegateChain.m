@@ -4,6 +4,11 @@
 @implementation UIScrollViewDelegateChain
 @dynamic delegate;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
+// All methods must be included in the build result, whatever the deployment target version is.
+// As a target which includes this library may be build with a higher deployment version.
+
 - (BOOL)respondsToSelector:(SEL)aSelector {
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didScroll, scrollViewDidScroll:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(willBeginDragging, scrollViewWillBeginDragging:)
@@ -18,6 +23,7 @@
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didEndZoomingView, scrollViewDidEndZooming:withView:atScale:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didZoom, scrollViewDidZoom:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didEndScrollingAnimation, scrollViewDidEndScrollingAnimation:)
+    _RFDelegateChainHasBlockPropertyRespondsToSelector(didChangeAdjustedContentInset, scrollViewDidChangeAdjustedContentInset:)
     return [super respondsToSelector:aSelector];
 }
 
@@ -128,5 +134,15 @@
     }
     [self.delegate scrollViewDidEndScrollingAnimation:scrollView];
 }
+
+- (void)scrollViewDidChangeAdjustedContentInset:(UIScrollView *)scrollView {
+    if (self.didChangeAdjustedContentInset) {
+        self.didChangeAdjustedContentInset(scrollView, self.delegate);
+        return;
+    }
+    [self.delegate scrollViewDidChangeAdjustedContentInset:scrollView];
+}
+
+#pragma clang diagnostic pop
 
 @end

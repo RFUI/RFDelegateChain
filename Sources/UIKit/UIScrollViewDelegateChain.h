@@ -11,42 +11,51 @@
 
 #import "RFDelegateChain.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIScrollViewDelegateChain : RFDelegateChain <
     UIScrollViewDelegate
 >
 
-@property (weak, nonatomic) IBOutlet id<UIScrollViewDelegate> delegate;
+@property (weak, nullable, nonatomic) IBOutlet id<UIScrollViewDelegate> delegate;
 
 #pragma mark Responding to Scrolling and Dragging
 
-@property (copy, nonatomic) void (^didScroll)(UIScrollView *scrollView, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^didScroll)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) void (^willBeginDragging)(UIScrollView *scrollView, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^willBeginDragging)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) void (^willEndDragging)(UIScrollView *scrollView, CGPoint velocity, CGPoint *targetContentOffset, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^willEndDragging)(UIScrollView *scrollView, CGPoint velocity, CGPoint *targetContentOffset, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) void (^didEndDragging)(UIScrollView *scrollView, BOOL decelerate, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^didEndDragging)(UIScrollView *scrollView, BOOL decelerate, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) BOOL (^shouldScrollToTop)(UIScrollView *scrollView, id<UIScrollViewDelegate> delegate);
+@property (nullable) BOOL (^shouldScrollToTop)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) void (^didScrollToTop)(UIScrollView *scrollView, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^didScrollToTop)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) void (^willBeginDecelerating)(UIScrollView *scrollView, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^willBeginDecelerating)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) void (^didEndDecelerating)(UIScrollView *scrollView, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^didEndDecelerating)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate);
 
 #pragma mark Managing Zooming
 
-@property (copy, nonatomic) UIView* (^viewForZooming)(UIScrollView *scrollView, id<UIScrollViewDelegate> delegate);
+@property (nullable) UIView* (^viewForZooming)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) void (^willBeginZoomingView)(UIScrollView *scrollView, UIView *view, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^willBeginZoomingView)(UIScrollView *scrollView, UIView *__nullable view, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) void (^didEndZoomingView)(UIScrollView *scrollView, UIView *view, CGFloat scale, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^didEndZoomingView)(UIScrollView *scrollView, UIView *__nullable view, CGFloat scale, id<UIScrollViewDelegate> __nullable delegate);
 
-@property (copy, nonatomic) void (^didZoom)(UIScrollView *scrollView, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^didZoom)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate);
 
 #pragma mark Responding to Scrolling Animations
 
-@property (copy, nonatomic) void (^didEndScrollingAnimation)(UIScrollView *scrollView, id<UIScrollViewDelegate> delegate);
+@property (nullable) void (^didEndScrollingAnimation)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate);
+
+#pragma mark Responding to Inset Changes
+
+@property (nullable) void (^didChangeAdjustedContentInset)(UIScrollView *scrollView, id<UIScrollViewDelegate> __nullable delegate) API_AVAILABLE(ios(11.0), tvos(11.0));
 
 @end
+
+NS_ASSUME_NONNULL_END
+

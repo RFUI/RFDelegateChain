@@ -1,6 +1,10 @@
 
 #import "UIWebViewDelegateChain.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 @implementation UIWebViewDelegateChain
 @dynamic delegate;
 
@@ -49,3 +53,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop

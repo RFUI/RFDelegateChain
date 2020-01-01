@@ -1,15 +1,12 @@
 
 #import "UISearchBarDelegateChain.h"
 
-@interface UISearchBarDelegateChain ()
-@end
-
 @implementation UISearchBarDelegateChain
 @dynamic delegate;
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if (self.didChange) {
-        self.didChange(searchBar, searchText, self.delegate);
+    if (self.textDidChange) {
+        self.textDidChange(searchBar, searchText, self.delegate);
         return;
     }
 

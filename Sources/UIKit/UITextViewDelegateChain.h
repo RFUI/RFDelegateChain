@@ -10,28 +10,40 @@
  */
 #import "RFDelegateChain.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UITextViewDelegateChain : RFDelegateChain <
     UITextViewDelegate
 >
 
-@property (weak, nonatomic) IBOutlet id<UITextViewDelegate> delegate;
+@property (weak, nullable, nonatomic) IBOutlet id<UITextViewDelegate> delegate;
 
-/// If thest property set, delegate methods wont called.
 #pragma mark Responding to Editing Notifications
-@property (copy, nonatomic) BOOL (^shouldBeginEditing)(UITextView *textView, id<UITextViewDelegate> delegate);
-@property (copy, nonatomic) void (^didBeginEditing)(UITextView *textView, id<UITextViewDelegate> delegate);
-@property (copy, nonatomic) BOOL (^shouldEndEditing)(UITextView *textView, id<UITextViewDelegate> delegate);
-@property (copy, nonatomic) void (^didEndEditing)(UITextView *textView, id<UITextViewDelegate> delegate);
+
+@property (nullable) BOOL (^shouldBeginEditing)(UITextView *textView, id<UITextViewDelegate> __nullable delegate);
+@property (nullable) void (^didBeginEditing)(UITextView *textView, id<UITextViewDelegate> __nullable delegate);
+@property (nullable) BOOL (^shouldEndEditing)(UITextView *textView, id<UITextViewDelegate> __nullable delegate);
+@property (nullable) void (^didEndEditing)(UITextView *textView, id<UITextViewDelegate> __nullable delegate);
 
 #pragma mark Responding to Text Changes
-@property (copy, nonatomic) BOOL (^shouldChangeTextInRange)(UITextView *textView, NSRange range, NSString *replacementText, id<UITextViewDelegate> delegate);
-@property (copy, nonatomic) void (^didChange)(UITextView *textView, id<UITextViewDelegate> delegate);
+
+@property (nullable) BOOL (^shouldChangeTextInRange)(UITextView *textView, NSRange range, NSString *replacementText, id<UITextViewDelegate> __nullable delegate);
+@property (nullable) void (^didChange)(UITextView *textView, id<UITextViewDelegate> __nullable delegate);
 
 #pragma mark Responding to Selection Changes
-@property (copy, nonatomic) void (^didChangeSelection)(UITextView *textView, id<UITextViewDelegate> delegate);
+
+@property (nullable) void (^didChangeSelection)(UITextView *textView, id<UITextViewDelegate> __nullable delegate);
 
 #pragma mark Interacting with Text Data
-@property (copy, nonatomic) BOOL (^shouldInteractWithURL)(UITextView *textView, NSURL *URL, NSRange characterRange, id<UITextViewDelegate> delegate) NS_AVAILABLE_IOS(7_0);
-@property (copy, nonatomic) BOOL (^shouldInteractWithTextAttachment)(UITextView *textView, NSTextAttachment *textAttachment, NSRange characterRange, id<UITextViewDelegate> delegate) NS_AVAILABLE_IOS(7_0);
+
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_10_0
+@property (nullable) BOOL (^shouldInteractWithURL)(UITextView *textView, NSURL *URL, NSRange characterRange, UITextItemInteraction interaction, id<UITextViewDelegate> __nullable delegate) API_AVAILABLE(ios(10.0), tvos(10.0));
+@property (nullable) BOOL (^shouldInteractWithTextAttachment)(UITextView *textView, NSTextAttachment *textAttachment, NSRange characterRange, UITextItemInteraction interaction, id<UITextViewDelegate> __nullable delegate) API_AVAILABLE(ios(10.0), tvos(10.0));
+#else
+@property (nullable) BOOL (^shouldInteractWithURL)(UITextView *textView, NSURL *URL, NSRange characterRange, NSInteger interaction, id<UITextViewDelegate> __nullable delegate);
+@property (nullable) BOOL (^shouldInteractWithTextAttachment)(UITextView *textView, NSTextAttachment *textAttachment, NSRange characterRange, NSInteger interaction, id<UITextViewDelegate> __nullable delegate);
+#endif
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,11 +1,21 @@
 
 #import "UITextViewDelegateChain.h"
 
-@interface UITextViewDelegateChain ()
-@end
 
 @implementation UITextViewDelegateChain
 @dynamic delegate;
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    if (@available(iOS 10.0, tvOS 10.0, *)) {
+        // Force use new API on newer OS.
+        if (aSelector == @selector(textView:shouldInteractWithURL:inRange:)) return NO;
+        if (aSelector == @selector(textView:shouldInteractWithTextAttachment:inRange:)) return NO;
+    }
+    else {
+        // Any shouldInteractWithURL and shouldInteractWithTextAttachment methods is available.
+    }
+    return [super respondsToSelector:aSelector];
+}
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     if (self.shouldBeginEditing) {
@@ -83,9 +93,52 @@
     }
 }
 
+#pragma mark -
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(nonnull NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    if (self.shouldInteractWithURL) {
+        return self.shouldInteractWithURL(textView, URL, characterRange, interaction, self.delegate);
+    }
+    if ([self.delegate respondsToSelector:@selector(textView:shouldInteractWithURL:inRange:interaction:)]) {
+        return [self.delegate textView:textView shouldInteractWithURL:URL inRange:characterRange interaction:interaction];
+    }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    else if ([self.delegate respondsToSelector:@selector(textView:shouldInteractWithURL:inRange:)]) {
+        return [self.delegate textView:textView shouldInteractWithURL:URL inRange:characterRange];
+#pragma clang diagnostic pop
+    }
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    if (self.shouldInteractWithTextAttachment) {
+        return self.shouldInteractWithTextAttachment(textView, textAttachment, characterRange, interaction, self.delegate);
+    }
+
+    if ([self.delegate respondsToSelector:@selector(textView:shouldInteractWithTextAttachment:inRange:interaction:)]) {
+        return [self.delegate textView:textView shouldInteractWithTextAttachment:textAttachment inRange:characterRange interaction:interaction];
+    }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    else if ([self.delegate respondsToSelector:@selector(textView:shouldInteractWithTextAttachment:inRange:)]) {
+        return [self.delegate textView:textView shouldInteractWithTextAttachment:textAttachment inRange:characterRange];
+#pragma clang diagnostic pop
+    }
+    return YES;
+}
+
+#pragma clang diagnostic pop
+
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_10_0
+    // No old methods.
+#else
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
     if (self.shouldInteractWithURL) {
-        return self.shouldInteractWithURL(textView, URL, characterRange, self.delegate);
+        return self.shouldInteractWithURL(textView, URL, characterRange, 0, self.delegate);
     }
 
     if ([self.delegate respondsToSelector:@selector(textView:shouldInteractWithURL:inRange:)]) {
@@ -96,7 +149,7 @@
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange {
     if (self.shouldInteractWithTextAttachment) {
-        return self.shouldInteractWithTextAttachment(textView, textAttachment, characterRange, self.delegate);
+        return self.shouldInteractWithTextAttachment(textView, textAttachment, characterRange, 0, self.delegate);
     }
 
     if ([self.delegate respondsToSelector:@selector(textView:shouldInteractWithTextAttachment:inRange:)]) {
@@ -104,5 +157,7 @@
     }
     return YES;
 }
+
+#endif
 
 @end

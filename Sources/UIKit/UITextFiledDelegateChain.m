@@ -81,4 +81,21 @@
     return YES;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
+// All methods must be included in the build result, whatever the deployment target version is.
+// As a target which includes this library may be build with a higher deployment version.
+
+- (void)textFieldDidChangeSelection:(UITextField *)textField {
+    if (self.didChangeSelection) {
+        self.didChangeSelection(textField, self.delegate);
+        return;
+    }
+    if ([self.delegate respondsToSelector:@selector(textFieldDidChangeSelection:)]) {
+        [self.delegate textFieldDidChangeSelection:textField];
+    }
+}
+
+#pragma clang diagnostic pop
+
 @end
