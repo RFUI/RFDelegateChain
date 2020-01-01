@@ -13,7 +13,7 @@
 @interface RFDelegateChain : NSObject <
     RFInitializing
 >
-@property (weak, nonatomic) IBOutlet id delegate;
+@property (weak, nullable, nonatomic) IBOutlet id delegate;
 
 @end
 

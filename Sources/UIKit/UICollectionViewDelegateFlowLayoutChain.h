@@ -10,29 +10,32 @@
  */
 #import "UICollectionViewDelegateChain.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UICollectionViewDelegateFlowLayoutChain : UICollectionViewDelegateChain <
     UICollectionViewDelegateFlowLayout
 >
 
-@property (weak, nonatomic) IBOutlet id<UICollectionViewDelegateFlowLayout> delegate;
+@property (weak, nullable, nonatomic) IBOutlet id<UICollectionViewDelegateFlowLayout> delegate;
 
 #pragma mark Getting the Size of Items
 
-@property (copy, nonatomic) CGSize (^sizeForItem)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSIndexPath *indexPath, id<UICollectionViewDelegateFlowLayout> delegate);
+@property (nullable) CGSize (^sizeForItem)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSIndexPath *indexPath, id<UICollectionViewDelegateFlowLayout> __nullable delegate);
 
 #pragma mark Getting the Section Spacing
 
-@property (copy, nonatomic) UIEdgeInsets (^insetForSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> delegate);
+@property (nullable) UIEdgeInsets (^insetForSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> __nullable delegate);
 
-@property (copy, nonatomic) CGFloat (^minimumLineSpacingForSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> delegate);
+@property (nullable) CGFloat (^minimumLineSpacingForSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> __nullable delegate);
 
-@property (copy, nonatomic) CGFloat (^minimumInteritemSpacingForSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> delegate);
+@property (nullable) CGFloat (^minimumInteritemSpacingForSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> __nullable delegate);
 
 #pragma mark Getting the Header and Footer Sizes
 
-@property (copy, nonatomic) CGSize (^referenceSizeForHeaderInSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> delegate);
+@property (nullable) CGSize (^referenceSizeForHeaderInSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> __nullable delegate);
 
-@property (copy, nonatomic) CGSize (^referenceSizeForFooterInSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> delegate);
-
+@property (nullable) CGSize (^referenceSizeForFooterInSection)(UICollectionView *collectionView, UICollectionViewLayout *collectionViewLayout, NSInteger section, id<UICollectionViewDelegateFlowLayout> __nullable delegate);
 
 @end
+
+NS_ASSUME_NONNULL_END
