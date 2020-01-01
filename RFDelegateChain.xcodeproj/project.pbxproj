@@ -10,6 +10,7 @@
 		48E92026D88EB3CD46CC8A11 /* libPods-Test-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 018A594909A55343CBA520D2 /* libPods-Test-iOS.a */; };
 		D55FF82C23BB1A7D0064B61F /* TestCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FF82B23BB1A7D0064B61F /* TestCore.swift */; };
 		D58A6FE523BB2283001C199E /* RTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A6FE423BB2283001C199E /* RTHelper.m */; };
+		D58A6FEB23BB7FC9001C199E /* TestCollectionViewDataSourceChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58A6FEA23BB7FC9001C199E /* TestCollectionViewDataSourceChain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		D55FF82D23BB1C760064B61F /* OCHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCHeader.h; sourceTree = "<group>"; };
 		D58A6FE323BB2283001C199E /* RTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTHelper.h; sourceTree = "<group>"; };
 		D58A6FE423BB2283001C199E /* RTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTHelper.m; sourceTree = "<group>"; };
+		D58A6FEA23BB7FC9001C199E /* TestCollectionViewDataSourceChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCollectionViewDataSourceChain.swift; sourceTree = "<group>"; };
 		E583B47539F8C187BC101747 /* Pods-Test-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test-iOS.release.xcconfig"; path = "Target Support Files/Pods-Test-iOS/Pods-Test-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				D55FF82623BB19660064B61F /* Info.plist */,
+				D58A6FEA23BB7FC9001C199E /* TestCollectionViewDataSourceChain.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			files = (
 				D58A6FE523BB2283001C199E /* RTHelper.m in Sources */,
 				D55FF82C23BB1A7D0064B61F /* TestCore.swift in Sources */,
+				D58A6FEB23BB7FC9001C199E /* TestCollectionViewDataSourceChain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

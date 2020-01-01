@@ -4,3 +4,7 @@
 
 #import "RTHelper.h"
 #import <RFDelegateChain/RFDelegateChain.h>
+
+#if TARGET_OS_IOS
+#import <RFDelegateChain/UICollectionViewDataSourceChain.h>
+#endif

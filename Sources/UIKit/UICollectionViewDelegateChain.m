@@ -27,9 +27,13 @@
     _RFDelegateChainHasBlockPropertyRespondsToSelector(transitionLayout, collectionView:transitionLayoutForOldLayout:newLayout:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(targetContentOffset, collectionView:targetContentOffsetForProposedContentOffset:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(targetIndexPathForMoveFromItem, collectionView:targetIndexPathForMoveFromItemAtIndexPath:toProposedIndexPath:)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     _RFDelegateChainHasBlockPropertyRespondsToSelector(shouldShowMenuForItem, collectionView:shouldShowMenuForItemAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(canPerformAction, collectionView:canPerformAction:forItemAtIndexPath:withSender:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(performAction, collectionView:performAction:forItemAtIndexPath:withSender:)
+#pragma clang diagnostic pop
+
 #if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
     _RFDelegateChainHasBlockPropertyRespondsToSelector(contextMenuConfigurationForItem, collectionView:contextMenuConfigurationForItemAtIndexPath:point:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(previewForHighlightingContextMenu, collectionView:previewForHighlightingContextMenuWithConfiguration:)
@@ -188,6 +192,10 @@
 
 #pragma mark -
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.shouldShowMenuForItem) {
         return self.shouldShowMenuForItem(collectionView, indexPath, self.delegate);
@@ -209,6 +217,8 @@
     }
     [self.delegate collectionView:collectionView performAction:action forItemAtIndexPath:indexPath withSender:sender];
 }
+
+#pragma clang diagnostic pop
 
 #if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
 - (UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point {
