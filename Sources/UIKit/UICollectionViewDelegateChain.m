@@ -34,17 +34,22 @@
     _RFDelegateChainHasBlockPropertyRespondsToSelector(performAction, collectionView:performAction:forItemAtIndexPath:withSender:)
 #pragma clang diagnostic pop
 
+
+#if TARGET_OS_IOS
 #if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
     _RFDelegateChainHasBlockPropertyRespondsToSelector(contextMenuConfigurationForItem, collectionView:contextMenuConfigurationForItemAtIndexPath:point:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(previewForHighlightingContextMenu, collectionView:previewForHighlightingContextMenuWithConfiguration:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(previewForDismissingContextMenu, collectionView:previewForDismissingContextMenuWithConfiguration:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(willPerformPreviewActionForMenu, collectionView:willPerformPreviewActionForMenuWithConfiguration:animator:)
 #endif
+#endif
     _RFDelegateChainHasBlockPropertyRespondsToSelector(canFocusItem, collectionView:canFocusItemAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(indexPathForPreferredFocusedView, indexPathForPreferredFocusedViewInCollectionView:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(shouldUpdateFocus, collectionView:shouldUpdateFocusInContext:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didUpdateFocus, collectionView:didUpdateFocusInContext:withAnimationCoordinator:)
+#if TARGET_OS_IOS
     _RFDelegateChainHasBlockPropertyRespondsToSelector(shouldSpringLoadItem, collectionView:shouldSpringLoadItemAtIndexPath:withContext:)
+#endif
     return [super respondsToSelector:aSelector];
 }
 
@@ -80,6 +85,7 @@
     [self.delegate collectionView:collectionView didDeselectItemAtIndexPath:indexPath];
 }
 
+#if TARGET_OS_IOS
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldBeginMultipleSelectionInteractionAtIndexPath:(NSIndexPath *)indexPath {
     if (self.shouldBeginMultipleSelectionInteraction) {
         return self.shouldBeginMultipleSelectionInteraction(collectionView, indexPath, self.delegate);
@@ -101,6 +107,7 @@
     }
     [self.delegate collectionViewDidEndMultipleSelectionInteraction:collectionView];
 }
+#endif
 
 #pragma mark -
 
@@ -220,6 +227,7 @@
 
 #pragma clang diagnostic pop
 
+#if TARGET_OS_IOS
 #if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
 - (UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point {
     if (self.contextMenuConfigurationForItem) {
@@ -250,6 +258,7 @@
     [self.delegate collectionView:collectionView willPerformPreviewActionForMenuWithConfiguration:configuration animator:animator];
 }
 #endif
+#endif
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canFocusItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.canFocusItem) {
@@ -279,12 +288,14 @@
     return [self.delegate collectionView:collectionView didUpdateFocusInContext:context withAnimationCoordinator:coordinator];
 }
 
+#if TARGET_OS_IOS
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSpringLoadItemAtIndexPath:(NSIndexPath *)indexPath withContext:(id<UISpringLoadedInteractionContext>)context {
     if (self.shouldSpringLoadItem) {
         return self.shouldSpringLoadItem(collectionView, indexPath, context, self.delegate);
     }
     return [self.delegate collectionView:collectionView shouldSpringLoadItemAtIndexPath:indexPath withContext:context];
 }
+#endif
 
 #pragma clang diagnostic pop
 
