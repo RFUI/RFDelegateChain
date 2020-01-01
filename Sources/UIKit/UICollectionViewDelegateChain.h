@@ -29,11 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable) void (^didDeselectItem)(UICollectionView *collectionView, NSIndexPath *indexPath, id<UICollectionViewDelegate> __nullable delegate);
 
+#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
 @property (nullable) BOOL (^shouldBeginMultipleSelectionInteraction)(UICollectionView *collectionView, NSIndexPath *indexPath, id<UICollectionViewDelegate> __nullable delegate) API_AVAILABLE(ios(13.0));
 
 @property (nullable) void (^didBeginMultipleSelectionInteraction)(UICollectionView *collectionView, NSIndexPath *indexPath, id<UICollectionViewDelegate> __nullable delegate) API_AVAILABLE(ios(13.0));
 
 @property (nullable) void (^didEndMultipleSelectionInteraction)(UICollectionView *collectionView, id<UICollectionViewDelegate> __nullable delegate) API_AVAILABLE(ios(13.0));
+#endif
 
 #pragma mark Managing Cell Highlighting
 

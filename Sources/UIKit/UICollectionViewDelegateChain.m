@@ -14,9 +14,11 @@
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didSelectItem, collectionView:didSelectItemAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(shouldDeselectItem, collectionView:shouldDeselectItemAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didDeselectItem, collectionView:didDeselectItemAtIndexPath:)
+#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
     _RFDelegateChainHasBlockPropertyRespondsToSelector(shouldBeginMultipleSelectionInteraction, collectionView:shouldBeginMultipleSelectionInteractionAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didBeginMultipleSelectionInteraction, collectionView:didBeginMultipleSelectionInteractionAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didEndMultipleSelectionInteraction, collectionViewDidEndMultipleSelectionInteraction:)
+#endif
     _RFDelegateChainHasBlockPropertyRespondsToSelector(shouldHighlightItem, collectionView:shouldHighlightItemAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didHighlightItem, collectionView:didHighlightItemAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didUnhighlightItem, collectionView:didUnhighlightItemAtIndexPath:)
