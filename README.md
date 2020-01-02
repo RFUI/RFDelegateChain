@@ -32,3 +32,5 @@ Subspec available:
 * UITextFieldDelegate
 * UITextViewDelegate
 * UIWebViewDelegate
+
+It is highly recommended to build this library with the same deployment target version as your target. This can be fixed with a [post_install script](https://github.com/CocoaPods/CocoaPods/issues/7314#issuecomment-422283045).
