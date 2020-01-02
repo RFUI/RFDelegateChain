@@ -14,7 +14,7 @@
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didSelectItem, collectionView:didSelectItemAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(shouldDeselectItem, collectionView:shouldDeselectItemAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didDeselectItem, collectionView:didDeselectItemAtIndexPath:)
-#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+#if TARGET_OS_IOS && defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
     _RFDelegateChainHasBlockPropertyRespondsToSelector(shouldBeginMultipleSelectionInteraction, collectionView:shouldBeginMultipleSelectionInteractionAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didBeginMultipleSelectionInteraction, collectionView:didBeginMultipleSelectionInteractionAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(didEndMultipleSelectionInteraction, collectionViewDidEndMultipleSelectionInteraction:)
@@ -36,14 +36,11 @@
     _RFDelegateChainHasBlockPropertyRespondsToSelector(performAction, collectionView:performAction:forItemAtIndexPath:withSender:)
 #pragma clang diagnostic pop
 
-
-#if TARGET_OS_IOS
-#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+#if TARGET_OS_IOS && defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
     _RFDelegateChainHasBlockPropertyRespondsToSelector(contextMenuConfigurationForItem, collectionView:contextMenuConfigurationForItemAtIndexPath:point:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(previewForHighlightingContextMenu, collectionView:previewForHighlightingContextMenuWithConfiguration:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(previewForDismissingContextMenu, collectionView:previewForDismissingContextMenuWithConfiguration:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(willPerformPreviewActionForMenu, collectionView:willPerformPreviewActionForMenuWithConfiguration:animator:)
-#endif
 #endif
     _RFDelegateChainHasBlockPropertyRespondsToSelector(canFocusItem, collectionView:canFocusItemAtIndexPath:)
     _RFDelegateChainHasBlockPropertyRespondsToSelector(indexPathForPreferredFocusedView, indexPathForPreferredFocusedViewInCollectionView:)
@@ -87,7 +84,7 @@
     [self.delegate collectionView:collectionView didDeselectItemAtIndexPath:indexPath];
 }
 
-#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+#if TARGET_OS_IOS && defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldBeginMultipleSelectionInteractionAtIndexPath:(NSIndexPath *)indexPath {
     if (self.shouldBeginMultipleSelectionInteraction) {
         return self.shouldBeginMultipleSelectionInteraction(collectionView, indexPath, self.delegate);
@@ -139,25 +136,19 @@
 #pragma mark -
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wpartial-availability"
     if (self.willDisplayCell) {
         self.willDisplayCell(collectionView, cell, indexPath, self.delegate);
         return;
     }
     [self.delegate collectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
-#pragma clang diagnostic pop
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wpartial-availability"
     if (self.willDisplaySupplementaryView) {
         self.willDisplaySupplementaryView(collectionView, view, elementKind, indexPath, self.delegate);
         return;
     }
     [self.delegate collectionView:collectionView willDisplaySupplementaryView:view forElementKind:elementKind atIndexPath:indexPath];
-#pragma clang diagnostic pop
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
