@@ -18,45 +18,26 @@
 @end
 
 #define RFDelegateChainForwardMethods(FROM, TO) \
-- (BOOL)respondsToSelector:(SEL)aSelector {\
-    if ([FROM respondsToSelector:aSelector]) {\
-        return YES;\
-    }\
-\
-    if ([TO respondsToSelector:aSelector]) {\
-        return YES;\
-    }\
-\
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {\
+    if ([FROM conformsToProtocol:aProtocol]) return YES;\
+    if ([TO conformsToProtocol:aProtocol]) return YES;\
     return NO;\
 }\
-\
+- (BOOL)respondsToSelector:(SEL)aSelector {\
+    if ([FROM respondsToSelector:aSelector]) return YES;\
+    if ([TO respondsToSelector:aSelector]) return YES;\
+    return NO;\
+}\
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {\
-    NSMethodSignature* signature = [FROM methodSignatureForSelector:aSelector];\
-\
-    if (!signature) {\
-        __strong id next = TO;\
-        if ([next respondsToSelector:aSelector]) {\
-            return [next methodSignatureForSelector:aSelector];\
-        }\
-    }\
-\
+    NSMethodSignature *signature = [FROM methodSignatureForSelector:aSelector];\
+    if (!signature) [TO methodSignatureForSelector:aSelector];\
     return signature;\
 }\
-\
 - (void)forwardInvocation:(NSInvocation *)anInvocation {\
-    __strong id next = TO;\
-    if ([next respondsToSelector:anInvocation.selector]) {\
-        [anInvocation invokeWithTarget:next];\
-    }\
+    [anInvocation invokeWithTarget:TO];\
 }\
-\
 - (id)forwardingTargetForSelector:(SEL)aSelector {\
-    __strong id next = TO;\
-    id target = [FROM forwardingTargetForSelector:aSelector];\
-    if (target != next) {\
-        return [next forwardingTargetForSelector:aSelector];\
-    }\
-    return target;\
+    return TO;\
 }
 
 #pragma clang diagnostic push

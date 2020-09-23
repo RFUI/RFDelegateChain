@@ -3,6 +3,7 @@
 //
 
 #import "RTHelper.h"
+#import "RTObjects.h"
 #import <RFDelegateChain/RFDelegateChain.h>
 
 #if TARGET_OS_IOS
