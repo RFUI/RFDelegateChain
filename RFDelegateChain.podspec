@@ -78,11 +78,4 @@ Pod::Spec.new do |ss|
     s.source_files = 'Sources/UIKit/UITextViewDelegateChain.{h,m}'
     s.public_header_files = 'Sources/UIKit/UITextViewDelegateChain.h'
   end
-
-  ss.subspec 'UIWebViewDelegate' do |s|
-    s.ios.deployment_target = '8.0'
-    s.dependency 'RFDelegateChain/Chain'
-    s.source_files = 'Sources/UIKit/UIWebViewDelegateChain.{h,m}'
-    s.public_header_files = 'Sources/UIKit/UIWebViewDelegateChain.h'
-  end
 end
