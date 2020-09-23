@@ -1,4 +1,4 @@
-#! /usr/bin/env sh
+#! /bin/zsh
 
 set -euo pipefail
 
@@ -14,10 +14,22 @@ logError () {
     echo "\033[31m$1\033[0m" >&2
 }
 
-logInfo "$TRAVIS_COMMIT_MESSAGE"
+# Make sure all parameters are set correctly.
+logInfo "RFCI_PRODUCT_NAME = $RFCI_PRODUCT_NAME"
+
+readonly RFCI_TASK="${RFCI_TASK:? is not set.}"
 logInfo "RFCI_TASK = $RFCI_TASK"
-readonly RFSTAGE="$1"
-logInfo "RFSTAGE = $RFSTAGE"
+
+readonly RFCI_STAGE="${1:?STAGE is not set.}"
+logInfo "RFCI_STAGE = $RFCI_STAGE"
+
+readonly RFWorkspace=${RFWorkspace:="$RFCI_PRODUCT_NAME.xcworkspace"}
+logInfo "RFWorkspace = $RFWorkspace"
+
+TRAVIS_COMMIT_MESSAGE=${TRAVIS_COMMIT_MESSAGE:="$(logWarning 'TRAVIS_COMMIT_MESSAGE is not set, leave it blank.')"}
+TRAVIS_BRANCH=${TRAVIS_BRANCH:="$(logWarning 'TRAVIS_BRANCH is not set, leave it blank.')"}
+
+echo ""
 
 # Run test
 # $1 scheme
@@ -33,7 +45,26 @@ XC_TestMac() {
 
 # Run watchOS test
 XC_TestWatch() {
-    xcodebuild build -workspace "$RFWorkspace" -scheme Target-watchOS ONLY_ACTIVE_ARCH=NO | xcpretty
+    xcodebuild build -workspace "$RFWorkspace" -scheme "Target-watchOS" ONLY_ACTIVE_ARCH=NO | xcpretty
+}
+
+# Run tests on iOS Simulator.
+# The destinations are the first and last available destination that are automatically detected.
+# $1 scheme
+XC_TestAutoIOS() {
+    logInfo "Detecting destinations..."
+    destList=$(xcodebuild -showdestinations -workspace "$RFWorkspace" -scheme "$1" | grep "iOS Simulator")
+    destCount=$(echo "$destList" | wc -l)
+    destFirst=$(echo "$destList" | head -1)
+    destLast=$(echo "$destList" | tail -2 | head -1)
+    destFirstID=$(echo "$destFirst" | awk 'match($0,/id\:[0-9A-F-]+/){ print substr($0,RSTART+3,RLENGTH-3) }')
+    destLastID=$(echo "$destLast" | awk 'match($0,/id\:[0-9A-F-]+/){ print substr($0,RSTART+3,RLENGTH-3) }')
+
+    logWarning "Test on simulator (id: $destFirstID)."
+    XC_Test "$1" "platform=iOS Simulator,id=$destFirstID"
+
+    logWarning "Test on simulator (id: $destLastID)."
+    XC_Test "$1" "platform=iOS Simulator,id=$destLastID"
 }
 
 STAGE_SETUP() {
@@ -45,14 +76,23 @@ STAGE_MAIN() {
         if [[ "$TRAVIS_COMMIT_MESSAGE" = *"[skip lint]"* ]]; then
             logWarning "Skip pod lint"
         else
-            logInfo "TRAVIS_BRANCH = $TRAVIS_BRANCH"
-            pod lib lint
+            if [[ "$TRAVIS_BRANCH" =~ ^[0-9]+\.[0-9]+ ]]; then
+                logWarning "Release the podspec."
+                pod trunk push "$RFCI_PRODUCT_NAME.podspec"
+            elif [ "$TRAVIS_BRANCH" = "master" ]; then
+                logInfo "Lint the podspec."
+                pod lib lint --fail-fast
+            else
+                logInfo "Lint the podspec."
+                pod lib lint --fail-fast --allow-warnings
+            fi
         fi
 
     elif [ "$RFCI_TASK" = "Xcode10" ]; then
         pod install
-        XC_Test "Test-iOS" "platform=iOS Simulator,name=iPhone XS Max,OS=12.0"
-        XC_Test "Test-iOS" "platform=iOS Simulator,name=iPhone 5,OS=9.0"
+        # XC_TestMac
+        XC_TestAutoIOS "Test-iOS"
+        XC_Test "Test-tvOS" "platform=tvOS Simulator,name=Apple TV"
     else
         logError "Unexpected CI task: $RFCI_TASK"
     fi
@@ -70,4 +110,4 @@ STAGE_FAILURE() {
     fi
 }
 
-"STAGE_$RFSTAGE"
+"STAGE_$RFCI_STAGE"
