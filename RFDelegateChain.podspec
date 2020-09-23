@@ -1,6 +1,6 @@
 Pod::Spec.new do |ss|
   ss.name       = 'RFDelegateChain'
-  ss.version    = '1.0.0'
+  ss.version    = '2.0.0'
   ss.summary    = 'DelegateChain allows the implementation of delegation to be distributed across multiple objects.'
   ss.homepage   = 'https://github.com/RFUI/RFDelegateChain'
   ss.license    = { :type => 'MIT' }
