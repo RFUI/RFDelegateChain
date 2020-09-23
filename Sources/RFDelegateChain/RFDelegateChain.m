@@ -49,8 +49,8 @@ RFInitializingRootForNSObject
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
     NSMethodSignature *signature = [super methodSignatureForSelector:aSelector];
-    if (!signature) [self.delegate methodSignatureForSelector:aSelector];
-    return signature;
+    if (signature) return signature;
+    return [self.delegate methodSignatureForSelector:aSelector];
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation {

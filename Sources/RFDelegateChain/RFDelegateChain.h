@@ -30,8 +30,8 @@
 }\
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {\
     NSMethodSignature *signature = [FROM methodSignatureForSelector:aSelector];\
-    if (!signature) [TO methodSignatureForSelector:aSelector];\
-    return signature;\
+    if (signature) return signature;\
+    return [TO methodSignatureForSelector:aSelector];\
 }\
 - (void)forwardInvocation:(NSInvocation *)anInvocation {\
     [anInvocation invokeWithTarget:TO];\
