@@ -25,7 +25,7 @@ Pod::Spec.new do |ss|
   end
 
   ss.subspec 'UICollectionViewDataSource' do |s|
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     s.tvos.deployment_target = '9.0'
     s.dependency 'RFDelegateChain/Chain'
     s.source_files = 'Sources/UIKit/UICollectionViewDataSourceChain.{h,m}'
@@ -33,7 +33,7 @@ Pod::Spec.new do |ss|
   end
 
   ss.subspec 'UICollectionViewDelegate' do |s|
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     s.tvos.deployment_target = '9.0'
     s.dependency 'RFDelegateChain/UIScrollViewDelegate'
     s.source_files = 'Sources/UIKit/UICollectionViewDelegateChain.{h,m}'
@@ -41,7 +41,7 @@ Pod::Spec.new do |ss|
   end
 
   ss.subspec 'UICollectionViewDelegateFlowLayout' do |s|
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     s.tvos.deployment_target = '9.0'
     s.dependency 'RFDelegateChain/UICollectionViewDelegate'
     s.source_files = 'Sources/UIKit/UICollectionViewDelegateFlowLayoutChain.{h,m}'
@@ -49,7 +49,7 @@ Pod::Spec.new do |ss|
   end
 
   ss.subspec 'UIScrollViewDelegate' do |s|
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     s.tvos.deployment_target = '9.0'
     s.dependency 'RFDelegateChain/Chain'
     s.source_files = 'Sources/UIKit/UIScrollViewDelegateChain.{h,m}'
@@ -57,14 +57,14 @@ Pod::Spec.new do |ss|
   end
 
   ss.subspec 'UISearchBarDelegate' do |s|
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     s.dependency 'RFDelegateChain/Chain'
     s.source_files = 'Sources/UIKit/UISearchBarDelegateChain.{h,m}'
     s.public_header_files = 'Sources/UIKit/UISearchBarDelegateChain.h'
   end
 
   ss.subspec 'UITextFieldDelegate' do |s|
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     s.tvos.deployment_target = '9.0'
     s.dependency 'RFDelegateChain/Chain'
     s.source_files = 'Sources/UIKit/UITextFiledDelegateChain.{h,m}'
@@ -72,7 +72,7 @@ Pod::Spec.new do |ss|
   end
 
   ss.subspec 'UITextViewDelegate' do |s|
-    s.ios.deployment_target = '8.0'
+    s.ios.deployment_target = '9.0'
     s.tvos.deployment_target = '9.0'
     s.dependency 'RFDelegateChain/Chain'
     s.source_files = 'Sources/UIKit/UITextViewDelegateChain.{h,m}'
